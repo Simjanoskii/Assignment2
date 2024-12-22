@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+<body>
+  
+    <header id="header">
+        <div class="header-container">
+            <h1 class="header-title">CONTACT US
+
+            </h1>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="mainContent">
+        <section id="contactSection">
+            <h2>We'd Love to Hear From You!</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+
+    <section id="themeSwitcher">
+        <h2>Theme Switcher</h2>
+        <button id="themeLight">Light Theme</button>
+        <button id="themeDark">Dark Theme</button>
+    </section>
+
+    <script>
+  
+        document.getElementById('themeLight').addEventListener('click', function () {
+            document.body.classList.remove('dark-theme');
+            document.body.classList.add('light-theme');
+        });
+
+        document.getElementById('themeDark').addEventListener('click', function () {
+            document.body.classList.remove('light-theme');
+            document.body.classList.add('dark-theme');
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !message) {
+                toastr.error('All fields are required.');
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                toastr.error('Please enter a valid email address.');
+                return;
+            }
+
+            toastr.success('Thank you for contacting us!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
